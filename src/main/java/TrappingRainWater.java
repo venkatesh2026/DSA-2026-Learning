@@ -30,4 +30,32 @@ public class TrappingRainWater {
         }
         return totalWater;
     }
+
+    //excluding the height of current bar and looking the max height of left/right exclude current height
+    public static int trap1(int[] height) {
+        if (height == null || height.length == 0) {
+            return 0;
+        }
+        int[] leftMax = new int[height.length];
+        int[] rightMax = new int[height.length];
+        int maxSoFar = 0;
+
+        for (int i = 0; i < height.length; i++) {
+            leftMax[i] = maxSoFar;
+            maxSoFar = Math.max(maxSoFar, height[i]);
+        }
+
+        maxSoFar = 0;
+        for (int i = height.length - 1; i >= 0; i--) {
+            rightMax[i] = maxSoFar;
+            maxSoFar = Math.max(maxSoFar, height[i]);
+        }
+
+        int totalWater = 0;
+        for (int i = 0; i < height.length; i++) {
+            int waterAtIndexI = Math.min(leftMax[i], rightMax[i]) - height[i];
+            totalWater = totalWater + (waterAtIndexI > 0 ? waterAtIndexI : 0);
+        }
+        return totalWater;
+    }
 }
