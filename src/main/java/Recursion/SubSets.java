@@ -12,6 +12,7 @@ public class SubSets {
         System.out.println(result);
     }
 
+
     public static void subSets(int[] nums, int index, List<Integer> list, List<List<Integer>> result) {
         if (index >= nums.length) {
             result.add(new ArrayList<>(list));
